@@ -11,7 +11,8 @@ import numpy as np
 import pandas as pd
 
 from qcore import timeseries, constants
-from qcore.constants import Components
+from qcore.constants import Components, PLATFORM_CONFIG
+from qcore.config import platform_config
 from qcore.im import order_im_cols_df
 
 from IM_calculation.IM import read_waveform, intensity_measures
@@ -348,7 +349,7 @@ def generate_metadata(output_folder, identifier, rupture, run_type, version):
     """
     date = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = get_result_filepath(
-        output_folder, identifier, constants.IM_SIM_CALC_INFO_SUFFIX
+        output_folder, identifier, platform_config[PLATFORM_CONFIG.IM_SIM_CALC_INFO_SUFFIX.value]
     )
 
     with open(output_path, "w") as meta_file:

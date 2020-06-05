@@ -349,7 +349,7 @@ def generate_metadata(output_folder, identifier, rupture, run_type, version):
     """
     date = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = get_result_filepath(
-        output_folder, identifier, platform_config[PLATFORM_CONFIG.IM_SIM_CALC_INFO_SUFFIX.value]
+        output_folder, identifier, platform_config[PLATFORM_CONFIG.IM_SIM_CALC_INFO_SUFFIX.name]
     )
 
     with open(output_path, "w") as meta_file:

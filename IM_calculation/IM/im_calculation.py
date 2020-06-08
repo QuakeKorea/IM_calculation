@@ -10,9 +10,8 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-from qcore import timeseries, constants
-from qcore.constants import Components, PLATFORM_CONFIG
-from qcore.config import platform_config
+from qcore import timeseries
+from qcore.constants import Components, IM_SIM_CALC_INFO_SUFFIX, EXT_PERIOD
 from qcore.im import order_im_cols_df
 
 from IM_calculation.IM import read_waveform, intensity_measures
@@ -260,7 +259,7 @@ def compute_measures_multiprocess(
     (
         components_to_calculate,
         components_to_store,
-    ) = constants.Components.get_comps_to_calc_and_store(comp)
+    ) = Components.get_comps_to_calc_and_store(comp)
 
     bbseries, station_names = get_bbseis(input_path, file_type, station_names)
 
@@ -349,7 +348,7 @@ def generate_metadata(output_folder, identifier, rupture, run_type, version):
     """
     date = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = get_result_filepath(
-        output_folder, identifier, platform_config[PLATFORM_CONFIG.IM_SIM_CALC_INFO_SUFFIX.name]
+        output_folder, identifier, IM_SIM_CALC_INFO_SUFFIX
     )
 
     with open(output_path, "w") as meta_file:
@@ -395,7 +394,7 @@ def validate_period(arg_period, arg_extended_period):
     period = np.array(arg_period, dtype="float64")
 
     if arg_extended_period:
-        period = np.unique(np.append(period, constants.EXT_PERIOD))
+        period = np.unique(np.append(period, EXT_PERIOD))
 
     return period
 

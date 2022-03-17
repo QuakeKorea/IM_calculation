@@ -141,7 +141,10 @@ def get_specific_energy_density_nd(velocity, times):
 
 def calculate_MMI_nd(velocities):
     pgv = get_max_nd(velocities)
-    return timeseries.pgv2MMI(pgv)
+    #Korea has its own pgv-mmi relation
+    return timeseries.pgv2MMI_yl2018(pgv)
+    #return timeseries.pgv2MMI(pgv)
+
 
 
 def getDs(dt, fx, percLow=5, percHigh=75):
